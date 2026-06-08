@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROHORECA AG GROUP — Poslovni dokumenti</title>
+<style>
+:root {
+  --bg:      #1a1a2e;
+  --bg2:     #16213e;
+  --bg3:     #0f3460;
+  --bg4:     #0a2240;
+  --bg5:     #1e3a5f;
+  --accent:  #e94560;
+  --blue:    #1a78c2;
+  --blue2:   #4fa3e8;
+  --text:    #eaeaea;
+  --text2:   #a8b2c8;
+  --text3:   #6b7a99;
+  --border:  #1e3a5f;
+  --border2: #2a4a7a;
+  --success: #27ae60;
+  --warning: #e67e22;
+  --danger:  #e74c3c;
+  --info:    #3498db;
+  --shadow:  0 4px 24px rgba(0,0,0,0.45);
+  --r:       8px;
+  --r2:      12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--text);
+  min-height:100vh;font-size:14px;line-height:1.55;
+}
+
+/* ── HEADER ─────────────────────────────────────────── */
+.hdr{
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:0 20px;display:flex;align-items:center;
+  justify-content:space-between;height:60px;
+  position:sticky;top:0;z-index:200;
+}
+.hdr-brand{display:flex;align-items:center;gap:12px;cursor:default;user-select:none}
+.hdr-icon{
+  width:38px;height:38px;
+  background:linear-gradient(135deg,#e94560,#b5202e);
+  border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-size:22px;flex-shrink:0;
+}
+.hdr-name{font-size:15px;font-weight:700;color:var(--text);line-height:1.2}
+.hdr-sub{font-size:11px;color:var(--text3);font-weight:400}
+.hdr-nav{display:flex;gap:4px}
+.nbtn{
+  padding:8px 16px;border-radius:var(--r);border:none;
+  cursor:pointer;font-size:13px;font-weight:500;
+  transition:background .18s,color .18s;
+  display:flex;align-items:center;gap:6px;
+  background:transparent;color:var(--text2);font-family:inherit;
+}
+.nbtn:hover{background:var(--bg3);color:var(--text)}
+.nbtn.active{background:var(--accent);color:#fff}
+
+/* ── LAYOUT ─────────────────────────────────────────── */
+.wrap{max-width:1440px;margin:0 auto;padding:24px 20px}
+.view{display:none}
+.view.on{display:block}
+
+/* ── CARDS ──────────────────────────────────────────── */
+.card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--r2);padding:20px;margin-bottom:16px;
+}
+.card-hd{
+  font-size:14px;font-weight:700;margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+  color:var(--text);letter-spacing:.2px;
+}
+
+/* ── FORMS ──────────────────────────────────────────── */
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.6px}
+.fg input,.fg select,.fg textarea{
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--r);padding:9px 11px;
+  color:var(--text);font-size:13.5px;font-family:inherit;
+  transition:border-color .18s;width:100%;
+}
+.fg input:focus,.fg select,.fg select:focus,.fg textarea:focus{
+  outline:none;border-color:var(--blue2);
+}
+.fg select{cursor:pointer}
+.fg select option{background:var(--bg3)}
+.fg textarea{resize:vertical;min-height:72px}
+.fg input[type=checkbox]{width:auto;accent-color:var(--accent);cursor:pointer}
+.fg input[readonly]{background:var(--bg4);cursor:default;color:var(--text2)}
+.chk-row{flex-direction:row;align-items:center;gap:9px}
+.chk-row label{font-size:13px;font-weight:500;color:var(--text);text-transform:none;letter-spacing:0;cursor:pointer}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gc2{grid-column:1/-1}
+
+/* ── BUTTONS ────────────────────────────────────────── */
+.btn{
+  padding:9px 17px;border-radius:var(--r);border:none;
+  cursor:pointer;font-size:13px;font-weight:500;
+  transition:filter .15s,background .15s;
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:inherit;white-space:nowrap;
+}
+.btn:hover{filter:brightness(1.12)}
+.btn:active{filter:brightness(.92)}
+.btn:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
+.bp{background:var(--accent);color:#fff}
+.bs{background:var(--bg3);color:var(--text);border:1px solid var(--border2)}
+.bsuc{background:var(--success);color:#fff}
+.binf{background:var(--info);color:#fff}
+.bwrn{background:var(--warning);color:#fff}
+.bdan{background:var(--danger);color:#fff}
+.bsm{padding:5px 10px;font-size:12px}
+.blg{padding:11px 22px;font-size:14px}
+
+/* ── LIST VIEW ──────────────────────────────────────── */
+.list-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;flex-wrap:wrap;gap:12px;
+}
+.list-hd h1{font-size:22px;font-weight:700}
+.list-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sbox{position:relative}
+.sbox input{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:20px;padding:8px 14px 8px 34px;
+  color:var(--text);font-size:13px;width:230px;font-family:inherit;
+}
+.sbox input:focus{outline:none;border-color:var(--blue2)}
+.sbox-ic{
+  position:absolute;left:11px;top:50%;transform:translateY(-50%);
+  color:var(--text3);pointer-events:none;font-size:13px;
+}
+.filters{display:flex;gap:6px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid var(--border)}
+.fbtn{
+  padding:6px 15px;border-radius:16px;border:1px solid var(--border2);
+  background:transparent;color:var(--text2);cursor:pointer;
+  font-size:12px;font-weight:500;transition:all .18s;font-family:inherit;
+}
+.fbtn:hover{border-color:var(--blue2);color:var(--text)}
+.fbtn.on{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* Table */
+.dtbl{width:100%;border-collapse:collapse}
+.dtbl th{
+  text-align:left;padding:11px 16px;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.7px;color:var(--text3);
+  border-bottom:1px solid var(--border);
+}
+.dtbl td{padding:13px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+.dtbl tr:last-child td{border-bottom:none}
+.dtbl tbody tr:hover td{background:rgba(26,120,194,.07)}
+.dnum{font-weight:700;font-size:13.5px;color:var(--blue2)}
+.damt{font-weight:700;white-space:nowrap}
+.ddate{color:var(--text2);font-size:13px}
+.act{display:flex;gap:4px;flex-wrap:wrap}
+
+/* Badges */
+.badge{
+  display:inline-flex;align-items:center;padding:3px 9px;
+  border-radius:10px;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.4px;
+}
+.b-pr{background:rgba(52,152,219,.18);color:#3498db}
+.b-av{background:rgba(230,126,34,.18);color:#e67e22}
+.b-fk{background:rgba(39,174,96,.18);color:#27ae60}
+
+.empty{text-align:center;padding:56px 20px;color:var(--text3)}
+.empty-ic{font-size:46px;margin-bottom:14px}
+.empty h3{font-size:17px;color:var(--text2);margin-bottom:6px}
+
+/* ── EDITOR VIEW ─────────────────────────────────────── */
+.ed-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;flex-wrap:wrap;gap:12px;
+}
+.ed-hd h1{font-size:20px;font-weight:700}
+.ed-acts{display:flex;gap:8px;flex-wrap:wrap}
+.ed-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+
+/* Items table in editor */
+.itbl-wrap{overflow-x:auto;margin-bottom:10px}
+.itbl{width:100%;border-collapse:collapse;min-width:580px}
+.itbl th{
+  text-align:left;padding:7px 8px;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;color:var(--text3);
+  border-bottom:1px solid var(--border);white-space:nowrap;
+}
+.itbl td{padding:5px 4px;vertical-align:top}
+.itbl input,.itbl select,.itbl textarea{
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:6px;padding:7px 8px;color:var(--text);
+  font-size:13px;font-family:inherit;width:100%;
+}
+.itbl textarea{resize:vertical;min-height:54px;line-height:1.4}
+.itbl input:focus,.itbl select:focus,.itbl textarea:focus{outline:none;border-color:var(--blue2)}
+.itbl .rn{color:var(--text3);text-align:center;padding-top:13px;min-width:24px;font-size:12px}
+.itotal{font-weight:700;white-space:nowrap;padding-top:13px;font-size:13px;min-width:100px}
+
+/* Totals */
+.tot-sec{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:flex-end}
+.tot-inner{min-width:270px;display:flex;flex-direction:column;gap:5px}
+.tot-row{display:flex;justify-content:space-between;gap:16px;padding:3px 0;font-size:13px}
+.tot-row label{color:var(--text2)}
+.tot-row span{font-weight:600}
+.tot-final{
+  border-top:2px solid var(--accent);padding-top:8px;margin-top:4px;
+  font-size:15px;font-weight:800;color:var(--accent);
+}
+
+/* Preview panel */
+.prev-panel{position:sticky;top:76px}
+.prev-head{
+  padding:11px 16px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.prev-head span{font-size:12px;font-weight:600;color:var(--text2)}
+.prev-body{
+  padding:18px;background:#fff;color:#111;
+  overflow-y:auto;max-height:calc(100vh - 200px);
+  border-radius:0 0 var(--r2) var(--r2);
+}
+
+/* ── SETTINGS VIEW ──────────────────────────────────── */
+.s-hd{font-size:22px;font-weight:700;margin-bottom:22px}
+.logo-drop{
+  border:2px dashed var(--border2);border-radius:var(--r);
+  padding:18px;text-align:center;cursor:pointer;
+  transition:border-color .18s;min-height:90px;
+  display:flex;align-items:center;justify-content:center;
+}
+.logo-drop:hover{border-color:var(--blue2)}
+.logo-drop img{max-height:72px;max-width:200px;object-fit:contain}
+.acc-list{display:flex;flex-direction:column;gap:8px}
+.acc-row{display:flex;gap:8px;align-items:center}
+.acc-row input{flex:1}
+.divider{height:1px;background:var(--border);margin:18px 0}
+
+/* ── MODAL ──────────────────────────────────────────── */
+.overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.72);z-index:500;
+  align-items:center;justify-content:center;
+}
+.overlay.on{display:flex}
+.modal{
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:var(--r2);padding:24px;max-width:420px;width:90%;
+}
+.modal h3{font-size:17px;margin-bottom:10px}
+.modal p{color:var(--text2);margin-bottom:20px;font-size:14px;line-height:1.5}
+.modal-acts{display:flex;gap:8px;justify-content:flex-end}
+
+/* ── TOASTS ─────────────────────────────────────────── */
+.toasts{position:fixed;bottom:22px;right:22px;z-index:1000;display:flex;flex-direction:column;gap:8px}
+.toast{
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:var(--r);padding:11px 16px;
+  font-size:13px;box-shadow:var(--shadow);
+  animation:tin .25s ease;display:flex;align-items:center;
+  gap:8px;min-width:230px;max-width:340px;
+}
+.toast.ok{border-left:3px solid var(--success)}
+.toast.err{border-left:3px solid var(--danger)}
+.toast.nfo{border-left:3px solid var(--info)}
+@keyframes tin{from{transform:translateX(18px);opacity:0}to{transform:none;opacity:1}}
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media(max-width:1100px){.ed-layout{grid-template-columns:1fr}}
+@media(max-width:760px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .gc2{grid-column:auto}
+  .hdr-sub{display:none}
+  .dtbl th:nth-child(4),.dtbl td:nth-child(4){display:none}
+  .sbox input{width:170px}
+}
+
+/* ════════════════════════════════════════════════════
+   PRINT STYLES
+   ════════════════════════════════════════════════════ */
+#print-area{display:none}
+
+@media print{
+  body>*:not(#print-area){display:none!important}
+  #print-area{display:block!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{margin:10mm 14mm;size:A4}
+}
+
+/* Document print/preview layout */
+.pdoc{
+  font-family:'Segoe UI',Arial,sans-serif;
+  color:#1a1a1a;background:#fff;
+  max-width:780px;margin:0 auto;font-size:12.5px;line-height:1.5;
+}
+.ph{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:22px;padding-bottom:14px;
+  border-bottom:2.5px solid #1a1a2e;
+}
+.ph-left{}
+.ph-logo img{max-height:68px;max-width:175px;object-fit:contain;display:block}
+.ph-name{font-size:21px;font-weight:800;color:#1a1a2e;letter-spacing:-.3px;line-height:1.15}
+.ph-sub{font-size:11.5px;color:#555;margin-top:2px}
+.ph-right{text-align:right}
+.ph-type{font-size:21px;font-weight:800;color:#1a1a2e;text-transform:uppercase;line-height:1.15}
+.ph-num{font-size:15px;font-weight:700;color:#c0392b;margin-top:3px}
+.ph-meta{font-size:11.5px;color:#555;margin-top:3px;line-height:1.7}
+
+.pparties{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.pplbl{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;color:#999;margin-bottom:6px}
+.ppname{font-size:14px;font-weight:700;color:#111;margin-bottom:3px}
+.ppd{font-size:12px;color:#444;margin-bottom:1px}
+
+.pspecial{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.psp-box{
+  background:#f0f5ff;border:1px solid #c5d4e8;
+  border-radius:6px;padding:10px 14px;min-width:160px;
+}
+.psp-lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;color:#777;margin-bottom:3px}
+.psp-val{font-size:14px;font-weight:800;color:#1a1a2e}
+
+.ptbl{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:12px}
+.ptbl th{
+  background:#1a1a2e;color:#fff;
+  padding:7px 9px;text-align:left;font-size:11px;font-weight:700;
+}
+.ptbl th:nth-child(n+4){text-align:right}
+.ptbl td{padding:7px 9px;border-bottom:1px solid #e8e8e8;vertical-align:top}
+.ptbl td:nth-child(1){color:#999;text-align:center;width:28px}
+.ptbl td:nth-child(n+4){text-align:right}
+.ptbl td:last-child{font-weight:700}
+.ptbl tr:nth-child(even) td{background:#f9fafb}
+.ptbl td.desc{white-space:pre-wrap;min-width:200px}
+
+.ptots{display:flex;justify-content:flex-end;margin-bottom:14px}
+.ptots-inner{min-width:250px}
+.ptot-row{
+  display:flex;justify-content:space-between;gap:18px;
+  padding:4px 0;border-bottom:1px solid #eee;font-size:12.5px;
+}
+.ptot-row:last-child{
+  border-bottom:none;border-top:2px solid #1a1a2e;
+  padding-top:8px;margin-top:4px;font-size:14.5px;font-weight:800;color:#1a1a2e;
+}
+.ptot-row label{color:#666}
+.ptot-row span{font-weight:600}
+
+.pnote{
+  margin-top:14px;padding:10px 14px;
+  background:#fffbf0;border-left:3px solid #e67e22;
+  border-radius:0 5px 5px 0;font-size:12px;color:#555;
+}
+.pnote strong{color:#333}
+
+.pfoot{
+  margin-top:28px;padding-top:14px;border-top:1px solid #ddd;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  font-size:11px;color:#888;
+}
+.psig{text-align:center;min-width:150px}
+.psig-line{border-top:1px solid #333;width:130px;margin:0 auto 5px}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────── -->
+<header class="hdr">
+  <div class="hdr-brand">
+    <div class="hdr-icon">⬡</div>
+    <div>
+      <div class="hdr-name">PROHORECA AG GROUP</div>
+      <div class="hdr-sub">Poslovni dokumenti</div>
+    </div>
+  </div>
+  <nav class="hdr-nav">
+    <button class="nbtn active" id="nb-list" onclick="showView('list')">📋 Dokumenti</button>
+    <button class="nbtn" id="nb-settings" onclick="showView('settings')">⚙️ Podešavanja</button>
+  </nav>
+</header>
+
+<!-- ── MAIN ───────────────────────────────────────── -->
+<main class="wrap">
+
+<!-- ════ LIST VIEW ════ -->
+<div class="view on" id="view-list">
+  <div class="list-hd">
+    <h1>Poslovni dokumenti</h1>
+    <div class="list-toolbar">
+      <div class="sbox">
+        <span class="sbox-ic">🔍</span>
+        <input type="text" id="s-search" placeholder="Broj / kupac..." oninput="renderList()">
+      </div>
+      <button class="btn bp blg" onclick="newDoc()">+ Novi dokument</button>
+    </div>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="filters">
+      <button class="fbtn on" data-f="all"       onclick="setFilter('all',this)">Svi</button>
+      <button class="fbtn"    data-f="predracun"  onclick="setFilter('predracun',this)">Predračuni</button>
+      <button class="fbtn"    data-f="avans"      onclick="setFilter('avans',this)">Avansni računi</button>
+      <button class="fbtn"    data-f="faktura"    onclick="setFilter('faktura',this)">Fakture</button>
+    </div>
+    <div id="list-body"></div>
+  </div>
+</div>
+
+<!-- ════ EDITOR VIEW ════ -->
+<div class="view" id="view-editor">
+  <div class="ed-hd">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="btn bs" onclick="showView('list')">← Nazad</button>
+      <h1 id="ed-title">Novi dokument</h1>
+    </div>
+    <div class="ed-acts">
+      <button class="btn binf" onclick="printDoc()">🖨️ Štampaj / PDF</button>
+      <button class="btn bsuc" onclick="saveDoc()">💾 Sačuvaj</button>
+    </div>
+  </div>
+
+  <div class="ed-layout">
+    <!-- ── FORM COLUMN ── -->
+    <div>
+      <!-- Tip, broj, datumi -->
+      <div class="card">
+        <div class="g3">
+          <div class="fg">
+            <label>Tip dokumenta</label>
+            <select id="f-type" onchange="onTypeChange()">
+              <option value="predracun">Predračun</option>
+              <option value="avans">Avansni račun</option>
+              <option value="faktura">Faktura</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Broj dokumenta</label>
+            <input type="text" id="f-num" readonly>
+          </div>
+          <div class="fg">
+            <label>Datum izdavanja</label>
+            <input type="date" id="f-date" oninput="updatePrev()">
+          </div>
+        </div>
+        <div style="height:11px"></div>
+        <div class="g2">
+          <div class="fg">
+            <label>Datum valute / rok plaćanja</label>
+            <input type="date" id="f-due" oninput="updatePrev()">
+          </div>
+          <div class="fg">
+            <label>Način plaćanja</label>
+            <select id="f-pay" onchange="updatePrev()">
+              <option value="Virman">Virman</option>
+              <option value="Gotovina">Gotovina</option>
+              <option value="Kartica">Kartica</option>
+            </select>
+          </div>
+        </div>
+        <!-- Predračun extras -->
+        <div id="xpr" style="display:none;margin-top:11px">
+          <div class="fg">
+            <label>Rok važenja predračuna</label>
+            <input type="date" id="f-valid" oninput="updatePrev()">
+          </div>
+        </div>
+        <!-- Avans extras -->
+        <div id="xav" style="display:none;margin-top:11px">
+          <div class="fg">
+            <label>Procenat avansa (%)</label>
+            <input type="number" id="f-apct" min="1" max="100" value="50" step="1" oninput="updatePrev()">
+          </div>
+        </div>
+      </div>
+
+      <!-- Kupac -->
+      <div class="card">
+        <div class="card-hd">👤 Podaci o kupcu</div>
+        <div class="g2">
+          <div class="fg"><label>Naziv firme / ime i prezime *</label><input type="text" id="f-cn" oninput="updatePrev()"></div>
+          <div class="fg"><label>Adresa</label><input type="text" id="f-ca" oninput="updatePrev()"></div>
+          <div class="fg"><label>PIB / JMBG (opciono)</label><input type="text" id="f-cp" oninput="updatePrev()"></div>
+          <div class="fg"><label>Telefon</label><input type="text" id="f-ct" oninput="updatePrev()"></div>
+          <div class="fg gc2"><label>Email</label><input type="email" id="f-ce" oninput="updatePrev()"></div>
+        </div>
+      </div>
+
+      <!-- Stavke -->
+      <div class="card">
+        <div class="card-hd">📦 Stavke dokumenta</div>
+        <div class="itbl-wrap">
+          <table class="itbl">
+            <thead>
+              <tr>
+                <th style="width:24px">#</th>
+                <th style="min-width:170px">Opis</th>
+                <th style="width:88px">J.M.</th>
+                <th style="width:72px">Kol.</th>
+                <th style="width:100px">Jed. cena</th>
+                <th style="width:72px">Popust %</th>
+                <th style="width:106px">Ukupno</th>
+                <th style="width:34px"></th>
+              </tr>
+            </thead>
+            <tbody id="items-body"></tbody>
+          </table>
+        </div>
+        <button class="btn bs bsm" onclick="addItem()">+ Dodaj stavku</button>
+
+        <div class="tot-sec">
+          <div class="tot-inner">
+            <div class="tot-row"><label>Zbir bez PDV:</label><span id="tt-sub">0,00 RSD</span></div>
+            <div class="tot-row" id="tt-vat-row" style="display:none"><label>PDV 20%:</label><span id="tt-vat">0,00 RSD</span></div>
+            <div class="tot-row" id="tt-av-row"  style="display:none"><label>Iznos avansa:</label><span id="tt-av">0,00 RSD</span></div>
+            <div class="tot-row tot-final"><label>UKUPNO ZA UPLATU:</label><span id="tt-tot">0,00 RSD</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PDV + napomena -->
+      <div class="card">
+        <div class="fg chk-row" style="margin-bottom:14px">
+          <input type="checkbox" id="f-vat" onchange="updatePrev()">
+          <label for="f-vat">Firma je u sistemu PDV-a (obračunati PDV 20%)</label>
+        </div>
+        <div class="fg">
+          <label>Napomena</label>
+          <textarea id="f-note" placeholder="Uslovi plaćanja, napomena o isporuci, garancija…" oninput="updatePrev()"></textarea>
+        </div>
+      </div>
+    </div><!-- /form col -->
+
+    <!-- ── PREVIEW COLUMN ── -->
+    <div class="prev-panel">
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="prev-head">
+          <span>📄 Pregled dokumenta (real-time)</span>
+          <button class="btn binf bsm" onclick="printDoc()">🖨️ Štampaj</button>
+        </div>
+        <div class="prev-body" id="live-prev"></div>
+      </div>
+    </div>
+  </div><!-- /ed-layout -->
+</div><!-- /view-editor -->
+
+<!-- ════ SETTINGS VIEW ════ -->
+<div class="view" id="view-settings">
+  <h1 class="s-hd">⚙️ Podešavanja firme</h1>
+  <div class="card">
+    <div class="card-hd">🏢 Podaci o firmi</div>
+
+    <div class="fg" style="margin-bottom:16px">
+      <label>Logo firme</label>
+      <div class="logo-drop" id="logo-drop" onclick="document.getElementById('logo-inp').click()">
+        <div id="logo-prv-wrap">
+          <div style="font-size:26px;margin-bottom:6px">📷</div>
+          <div style="color:var(--text3);font-size:13px">Kliknite za upload loga (PNG, JPG, SVG)</div>
+        </div>
+      </div>
+      <input type="file" id="logo-inp" accept="image/*" style="display:none" onchange="uploadLogo(this)">
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+        <button class="btn bdan bsm" id="logo-rm-btn" style="display:none" onclick="removeLogo()">🗑️ Ukloni logo</button>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="fg"><label>Naziv firme *</label><input type="text" id="s-name" placeholder="PROHORECA AG GROUP"></div>
+      <div class="fg"><label>Adresa</label><input type="text" id="s-addr" placeholder="Ulica i broj, Grad"></div>
+      <div class="fg"><label>PIB</label><input type="text" id="s-pib" placeholder="123456789"></div>
+      <div class="fg"><label>Matični broj (MB)</label><input type="text" id="s-mb" placeholder="12345678"></div>
+      <div class="fg"><label>Telefon</label><input type="text" id="s-tel" placeholder="+381 11 123 4567"></div>
+      <div class="fg"><label>Email</label><input type="email" id="s-email" placeholder="info@prohoreca.rs"></div>
+      <div class="fg gc2"><label>Website (opciono)</label><input type="text" id="s-web" placeholder="www.prohoreca.rs"></div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="card-hd">🏦 Žiro račun/i</div>
+    <div class="acc-list" id="acc-list"></div>
+    <button class="btn bs bsm" style="margin-top:10px" onclick="addAcc()">+ Dodaj račun</button>
+
+    <div class="divider"></div>
+    <div class="fg chk-row" style="margin-bottom:20px">
+      <input type="checkbox" id="s-vat">
+      <label for="s-vat">Firma je u sistemu PDV-a (utiče na sve nove dokumente)</label>
+    </div>
+    <button class="btn bp blg" onclick="saveSettings()">💾 Sačuvaj podešavanja</button>
+  </div>
+</div>
+
+</main><!-- /wrap -->
+
+<!-- Print area (hidden, shown only via @media print) -->
+<div id="print-area">
+  <div id="print-doc" class="pdoc"></div>
+</div>
+
+<!-- Confirm modal -->
+<div class="overlay" id="confirm-ov">
+  <div class="modal">
+    <h3 id="cm-title">Potvrda</h3>
+    <p id="cm-msg">Da li ste sigurni?</p>
+    <div class="modal-acts">
+      <button class="btn bs" onclick="closeModal()">Otkaži</button>
+      <button class="btn bdan" id="cm-ok">Potvrdi</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toasts -->
+<div class="toasts" id="toasts"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  CONSTANTS
+// ═══════════════════════════════════════════════════════
+const SK = { DOCS:'ph_docs', SET:'ph_settings', CTR:'ph_counters' };
+
+// ═══════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════
+let activeFilter = 'all';
+let editId       = null;   // null = new doc
+let items        = [];     // current editing items
+let iCtr         = 0;      // item id counter
+let confirmCb    = null;
+
+// ═══════════════════════════════════════════════════════
+//  STORAGE HELPERS
+// ═══════════════════════════════════════════════════════
+const getDocs    = () => JSON.parse(localStorage.getItem(SK.DOCS)  || '[]');
+const saveDocs   = d  => localStorage.setItem(SK.DOCS, JSON.stringify(d));
+const getCtr     = () => JSON.parse(localStorage.getItem(SK.CTR)   || '{}');
+const saveCtr    = c  => localStorage.setItem(SK.CTR, JSON.stringify(c));
+
+function getSettings(){
+  const def = {
+    name:'PROHORECA AG GROUP', address:'', pib:'', mb:'',
+    accounts:[''], phone:'', email:'', website:'',
+    vatRegistered:false, logo:null
+  };
+  try{ return Object.assign({}, def, JSON.parse(localStorage.getItem(SK.SET)||'{}')); }
+  catch{ return def; }
+}
+function saveSettingsData(s){ localStorage.setItem(SK.SET, JSON.stringify(s)); }
+
+// Next doc number (actually increments counter)
+function nextNum(type){
+  const yr = new Date().getFullYear();
+  const c  = getCtr();
+  const k  = `${type}_${yr}`;
+  c[k]     = (c[k]||0) + 1;
+  saveCtr(c);
+  const pfx = {predracun:'PR', avans:'AR', faktura:'F'}[type];
+  return `${pfx}-${yr}-${String(c[k]).padStart(3,'0')}`;
+}
+// Peek without incrementing
+function peekNum(type){
+  const yr = new Date().getFullYear();
+  const c  = getCtr();
+  const k  = `${type}_${yr}`;
+  const n  = (c[k]||0) + 1;
+  const pfx = {predracun:'PR', avans:'AR', faktura:'F'}[type];
+  return `${pfx}-${yr}-${String(n).padStart(3,'0')}`;
+}
+
+// ═══════════════════════════════════════════════════════
+//  VIEW MANAGEMENT
+// ═══════════════════════════════════════════════════════
+function showView(v){
+  document.querySelectorAll('.view').forEach(el => el.classList.remove('on'));
+  document.querySelectorAll('.nbtn').forEach(b  => b.classList.remove('active'));
+  document.getElementById('view-'+v).classList.add('on');
+  const nb = document.getElementById('nb-'+v);
+  if(nb) nb.classList.add('active');
+  if(v==='list')     renderList();
+  if(v==='settings') loadSettingsForm();
+  window.scrollTo(0,0);
+}
+
+// ═══════════════════════════════════════════════════════
+//  LIST VIEW
+// ═══════════════════════════════════════════════════════
+function setFilter(f, btn){
+  activeFilter = f;
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderList();
+}
+
+function renderList(){
+  let docs = getDocs();
+  const q  = (document.getElementById('s-search').value||'').toLowerCase().trim();
+  if(activeFilter !== 'all') docs = docs.filter(d => d.type === activeFilter);
+  if(q) docs = docs.filter(d =>
+    d.number.toLowerCase().includes(q) ||
+    (d.client.name||'').toLowerCase().includes(q)
+  );
+  docs.sort((a,b) => (b.date||'').localeCompare(a.date||''));
+
+  const el = document.getElementById('list-body');
+  if(!docs.length){
+    el.innerHTML = `<div class="empty">
+      <div class="empty-ic">📄</div>
+      <h3>Nema dokumenata</h3>
+      <p>Kliknite "+ Novi dokument" da kreirate prvi poslovni dokument.</p>
+    </div>`;
+    return;
+  }
+
+  const typeN = {predracun:'Predračun', avans:'Avansni', faktura:'Faktura'};
+  const badgC = {predracun:'b-pr', avans:'b-av', faktura:'b-fk'};
+
+  const rows = docs.map(d => {
+    let acts = `
+      <button class="btn bs bsm" onclick="editDoc('${d.id}')">✏️ Uredi</button>
+      <button class="btn bs bsm" onclick="dupDoc('${d.id}')">⧉ Dupliraj</button>
+      <button class="btn binf bsm" onclick="printById('${d.id}')">🖨️</button>`;
+    if(d.type==='predracun')
+      acts += `<button class="btn bsuc bsm" onclick="toFaktura('${d.id}')">→ Faktura</button>`;
+    acts += `<button class="btn bdan bsm" onclick="delConfirm('${d.id}')">🗑️</button>`;
+
+    return `<tr>
+      <td><span class="dnum">${esc(d.number)}</span></td>
+      <td><span class="badge ${badgC[d.type]}">${typeN[d.type]}</span></td>
+      <td>${esc(d.client.name||'—')}</td>
+      <td class="ddate">${fmtDate(d.date)}</td>
+      <td class="damt">${fmtMoney(d.totalAmount||0)}</td>
+      <td class="act">${acts}</td>
+    </tr>`;
+  }).join('');
+
+  el.innerHTML = `<table class="dtbl">
+    <thead><tr>
+      <th>Broj</th><th>Tip</th><th>Kupac</th>
+      <th>Datum</th><th>Iznos</th><th>Akcije</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+// ═══════════════════════════════════════════════════════
+//  EDITOR
+// ═══════════════════════════════════════════════════════
+function newDoc(){
+  editId = null;
+  items  = [];
+  const s   = getSettings();
+  const now = toDateVal(new Date());
+  const due = toDateVal(addDays(new Date(),15));
+  const val = toDateVal(addDays(new Date(),30));
+
+  $('f-type').value = 'predracun';
+  $('f-num').value  = peekNum('predracun');
+  $('f-date').value = now;
+  $('f-due').value  = due;
+  $('f-pay').value  = 'Virman';
+  $('f-valid').value= val;
+  $('f-apct').value = '50';
+  $('f-cn').value   = '';
+  $('f-ca').value   = '';
+  $('f-cp').value   = '';
+  $('f-ct').value   = '';
+  $('f-ce').value   = '';
+  $('f-note').value = '';
+  $('f-vat').checked= s.vatRegistered||false;
+
+  addItem();
+  onTypeChange();
+  $('ed-title').textContent = 'Novi dokument';
+  showView('editor');
+}
+
+function editDoc(id){
+  const doc = getDocs().find(d=>d.id===id);
+  if(!doc) return;
+  editId = id;
+  items  = doc.items.map(x=>({...x}));
+
+  $('f-type').value  = doc.type;
+  $('f-num').value   = doc.number;
+  $('f-date').value  = doc.date||'';
+  $('f-due').value   = doc.dueDate||'';
+  $('f-pay').value   = doc.paymentMethod||'Virman';
+  $('f-valid').value = doc.validUntil||'';
+  $('f-apct').value  = doc.advancePct||50;
+  $('f-cn').value    = doc.client.name||'';
+  $('f-ca').value    = doc.client.address||'';
+  $('f-cp').value    = doc.client.pib||'';
+  $('f-ct').value    = doc.client.phone||'';
+  $('f-ce').value    = doc.client.email||'';
+  $('f-note').value  = doc.note||'';
+  $('f-vat').checked = doc.vatIncluded||false;
+
+  renderItems();
+  onTypeChange();
+  $('ed-title').textContent = `Uredi: ${doc.number}`;
+  showView('editor');
+}
+
+function onTypeChange(){
+  const t = $('f-type').value;
+  $('xpr').style.display = t==='predracun' ? 'block' : 'none';
+  $('xav').style.display = t==='avans'     ? 'block' : 'none';
+  $('tt-av-row').style.display = t==='avans' ? 'flex' : 'none';
+  if(!editId) $('f-num').value = peekNum(t);
+  updatePrev();
+}
+
+// ── Items ────────────────────────────────────────────
+function addItem(){
+  iCtr++;
+  items.push({_id:iCtr, description:'', unit:'kom', qty:1, price:0, discount:0});
+  renderItems();
+  updatePrev();
+}
+
+function removeItem(i){
+  items.splice(i,1);
+  renderItems();
+  updatePrev();
+}
+
+function renderItems(){
+  const units = ['kom','m²','m','paušal','h','komplet','set'];
+  const tb = document.getElementById('items-body');
+  tb.innerHTML = items.map((it,i) => `
+    <tr>
+      <td class="rn">${i+1}</td>
+      <td><textarea placeholder="Opis radova ili artikla…"
+        oninput="setField(${i},'description',this.value)">${esc(it.description)}</textarea></td>
+      <td><select onchange="setField(${i},'unit',this.value)">
+        ${units.map(u=>`<option value="${u}"${it.unit===u?' selected':''}>${u}</option>`).join('')}
+      </select></td>
+      <td><input type="number" min="0" step="0.01" value="${it.qty}"
+        oninput="setField(${i},'qty',+this.value)"></td>
+      <td><input type="number" min="0" step="0.01" value="${it.price}"
+        oninput="setField(${i},'price',+this.value)"></td>
+      <td><input type="number" min="0" max="100" step="0.1" value="${it.discount}"
+        oninput="setField(${i},'discount',+this.value)"></td>
+      <td class="itotal" id="it-${i}">${fmtMoney(itemTotal(it))}</td>
+      <td><button class="btn bdan bsm" style="padding:4px 7px" onclick="removeItem(${i})">×</button></td>
+    </tr>`).join('');
+}
+
+function setField(i, f, v){
+  items[i][f] = v;
+  const el = document.getElementById(`it-${i}`);
+  if(el) el.textContent = fmtMoney(itemTotal(items[i]));
+  calcTotals();
+  updatePrev();
+}
+
+function itemTotal(it){
+  return (parseFloat(it.qty)||0) * (parseFloat(it.price)||0) * (1-(parseFloat(it.discount)||0)/100);
+}
+
+function calcTotals(){
+  const vat  = $('f-vat').checked;
+  const type = $('f-type').value;
+  const apct = parseFloat($('f-apct').value)||50;
+  const sub  = items.reduce((s,it)=>s+itemTotal(it),0);
+  const vatA = vat ? sub*0.2 : 0;
+  const total= sub + vatA;
+  const avA  = type==='avans' ? total*(apct/100) : 0;
+  const pay  = type==='avans' ? avA : total;
+
+  $('tt-sub').textContent = fmtMoney(sub);
+  $('tt-vat').textContent = fmtMoney(vatA);
+  $('tt-av').textContent  = fmtMoney(avA);
+  $('tt-tot').textContent = fmtMoney(pay);
+  $('tt-vat-row').style.display = vat ? 'flex' : 'none';
+  $('tt-av-row').style.display  = type==='avans' ? 'flex' : 'none';
+
+  return {sub, vatA, total, avA, pay, vat, type, apct};
+}
+
+function saveDoc(){
+  const cn = $('f-cn').value.trim();
+  if(!cn){ toast('Unesite naziv kupca!','err'); $('f-cn').focus(); return; }
+
+  const t  = $('f-type').value;
+  const { sub, vatA, total, avA, pay, vat, apct } = calcTotals();
+  const s  = getSettings();
+
+  const doc = {
+    id: editId || uid(),
+    type: t,
+    number: editId ? $('f-num').value : nextNum(t),
+    date: $('f-date').value,
+    dueDate: $('f-due').value,
+    paymentMethod: $('f-pay').value,
+    validUntil: $('f-valid').value,
+    advancePct: apct,
+    client:{
+      name:    $('f-cn').value,
+      address: $('f-ca').value,
+      pib:     $('f-cp').value,
+      phone:   $('f-ct').value,
+      email:   $('f-ce').value,
+    },
+    items: items.map(it=>({...it, _total:itemTotal(it)})),
+    note: $('f-note').value,
+    vatIncluded: vat,
+    subtotal: sub, vatAmount: vatA, totalAmount: pay,
+    companySnapshot: {...s}
+  };
+
+  const docs = getDocs();
+  if(editId){
+    const idx = docs.findIndex(d=>d.id===editId);
+    if(idx>=0) docs[idx]=doc; else docs.unshift(doc);
+  } else {
+    docs.unshift(doc);
+    editId = doc.id;
+    $('f-num').value = doc.number;
+    $('ed-title').textContent = `Uredi: ${doc.number}`;
+  }
+  saveDocs(docs);
+  toast(`Dokument ${doc.number} je sačuvan!`, 'ok');
+}
+
+function dupDoc(id){
+  const orig = getDocs().find(d=>d.id===id);
+  if(!orig) return;
+  const nd = JSON.parse(JSON.stringify(orig));
+  nd.id     = uid();
+  nd.number = nextNum(orig.type);
+  nd.date   = toDateVal(new Date());
+  nd.dueDate= toDateVal(addDays(new Date(),15));
+  const docs = getDocs();
+  docs.unshift(nd);
+  saveDocs(docs);
+  toast(`Duplikat kreiran: ${nd.number}`, 'ok');
+  renderList();
+}
+
+function toFaktura(id){
+  confirm2('Konvertuj u Fakturu',
+    'Biće kreiran novi dokument tipa Faktura na osnovu ovog predračuna. Nastaviti?',
+    ()=>{
+      const orig = getDocs().find(d=>d.id===id);
+      if(!orig) return;
+      const nd   = JSON.parse(JSON.stringify(orig));
+      nd.id      = uid();
+      nd.type    = 'faktura';
+      nd.number  = nextNum('faktura');
+      nd.date    = toDateVal(new Date());
+      nd.dueDate = toDateVal(addDays(new Date(),15));
+      const docs = getDocs();
+      docs.unshift(nd);
+      saveDocs(docs);
+      toast(`Faktura ${nd.number} kreirana!`, 'ok');
+      renderList();
+    }
+  );
+}
+
+function delConfirm(id){
+  const doc = getDocs().find(d=>d.id===id);
+  if(!doc) return;
+  confirm2('Brisanje dokumenta',
+    `Brisanje dokumenta ${doc.number} je trajna akcija. Nastaviti?`,
+    ()=>{
+      saveDocs(getDocs().filter(d=>d.id!==id));
+      toast('Dokument obrisan.','nfo');
+      renderList();
+    }
+  );
+}
+
+// ═══════════════════════════════════════════════════════
+//  DOCUMENT HTML BUILDER  (used for both preview & print)
+// ═══════════════════════════════════════════════════════
+function buildDocHtml(doc){
+  const s  = doc.companySnapshot || getSettings();
+  const tN = {predracun:'PREDRAČUN', avans:'AVANSNI RAČUN', faktura:'FAKTURA'};
+  const apct = doc.advancePct || 50;
+
+  // Recalculate from items for accuracy
+  const sub  = (doc.items||[]).reduce((x,it)=>x+itemTotal(it),0);
+  const vat  = doc.vatIncluded ? sub*0.2 : 0;
+  const grd  = sub + vat;
+  const av   = doc.type==='avans' ? grd*(apct/100) : 0;
+  const pay  = doc.type==='avans' ? av : grd;
+
+  // Logo / name header
+  let logoHtml = '';
+  if(s.logo){
+    logoHtml = `<div class="ph-logo"><img src="${s.logo}" alt="Logo"></div>
+                <div class="ph-name">${esc(s.name||'')}</div>`;
+  } else {
+    logoHtml = `<div class="ph-name">${esc(s.name||'')}</div>`;
+  }
+
+  // Company details
+  const compDets = [
+    s.address ? `<div class="ph-sub">${esc(s.address)}</div>` : '',
+    (s.pib||s.mb) ? `<div class="ph-sub">PIB: ${esc(s.pib||'')}${s.mb?` | MB: ${esc(s.mb)}`:''}` + '</div>' : '',
+    s.phone  ? `<div class="ph-sub">Tel: ${esc(s.phone)}</div>` : '',
+    s.email  ? `<div class="ph-sub">${esc(s.email)}</div>` : '',
+  ].join('');
+
+  // Accounts
+  const accs = (s.accounts||[]).filter(a=>a.trim());
+  const accHtml = accs.map(a=>`<div class="ppd">Žiro račun: ${esc(a)}</div>`).join('');
+
+  // Items rows
+  const irows = (doc.items||[]).map((it,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td class="desc">${esc(it.description)}</td>
+      <td>${esc(it.unit)}</td>
+      <td>${fmtNum(it.qty)}</td>
+      <td>${fmtMoney(it.price)}</td>
+      <td>${(parseFloat(it.discount)||0)>0 ? (parseFloat(it.discount))+'%' : '—'}</td>
+      <td>${fmtMoney(itemTotal(it))}</td>
+    </tr>`).join('');
+
+  // Totals block
+  let totsHtml = `
+    <div class="ptot-row"><label>Zbir bez PDV:</label><span>${fmtMoney(sub)}</span></div>`;
+  if(doc.vatIncluded)
+    totsHtml += `<div class="ptot-row"><label>PDV 20%:</label><span>${fmtMoney(vat)}</span></div>`;
+  if(doc.type==='avans')
+    totsHtml += `<div class="ptot-row"><label>Iznos avansa (${apct}%):</label><span>${fmtMoney(av)}</span></div>`;
+  totsHtml += `<div class="ptot-row"><label>UKUPNO ZA UPLATU:</label><span>${fmtMoney(pay)}</span></div>`;
+
+  // Special boxes
+  let spHtml = '';
+  if(doc.type==='predracun' && doc.validUntil)
+    spHtml += `<div class="psp-box"><div class="psp-lbl">Rok važenja</div><div class="psp-val">${fmtDate(doc.validUntil)}</div></div>`;
+  if(doc.type==='avans'){
+    spHtml += `<div class="psp-box"><div class="psp-lbl">Avans</div><div class="psp-val">${apct}%</div></div>`;
+    spHtml += `<div class="psp-box"><div class="psp-lbl">Iznos avansa</div><div class="psp-val">${fmtMoney(av)}</div></div>`;
+  }
+
+  // Note
+  const noteHtml = doc.note
+    ? `<div class="pnote"><strong>Napomena:</strong> ${esc(doc.note)}</div>` : '';
+
+  // Footer contact
+  const fctact = [
+    s.phone  && `Tel: ${s.phone}`,
+    s.email  && s.email,
+    s.website && s.website,
+  ].filter(Boolean).join(' | ');
+
+  return `
+<div class="ph">
+  <div class="ph-left">
+    ${logoHtml}
+    ${compDets}
+  </div>
+  <div class="ph-right">
+    <div class="ph-type">${tN[doc.type]}</div>
+    <div class="ph-num">Broj: ${esc(doc.number)}</div>
+    <div class="ph-meta">
+      Datum: ${fmtDate(doc.date)}<br>
+      Valuta: ${fmtDate(doc.dueDate)}<br>
+      Plaćanje: ${esc(doc.paymentMethod||'')}
+    </div>
+  </div>
+</div>
+
+<div class="pparties">
+  <div>
+    <div class="pplbl">Izdaje</div>
+    <div class="ppname">${esc(s.name||'')}</div>
+    ${s.address ? `<div class="ppd">${esc(s.address)}</div>` : ''}
+    ${s.pib     ? `<div class="ppd">PIB: ${esc(s.pib)}</div>` : ''}
+    ${s.mb      ? `<div class="ppd">MB: ${esc(s.mb)}</div>` : ''}
+    ${accHtml}
+    ${s.phone   ? `<div class="ppd">Tel: ${esc(s.phone)}</div>` : ''}
+    ${s.vatRegistered ? '<div class="ppd" style="color:#27ae60;font-weight:700">★ PDV obveznik</div>' : ''}
+  </div>
+  <div>
+    <div class="pplbl">Kupac / Naručilac</div>
+    <div class="ppname">${esc(doc.client.name||'—')}</div>
+    ${doc.client.address ? `<div class="ppd">${esc(doc.client.address)}</div>` : ''}
+    ${doc.client.pib     ? `<div class="ppd">PIB/JMBG: ${esc(doc.client.pib)}</div>` : ''}
+    ${doc.client.phone   ? `<div class="ppd">Tel: ${esc(doc.client.phone)}</div>` : ''}
+    ${doc.client.email   ? `<div class="ppd">Email: ${esc(doc.client.email)}</div>` : ''}
+  </div>
+</div>
+
+${spHtml ? `<div class="pspecial">${spHtml}</div>` : ''}
+
+<table class="ptbl">
+  <thead><tr>
+    <th>#</th><th>Opis radova / artikla</th><th>J.M.</th>
+    <th>Kol.</th><th>Jed. cena</th><th>Popust</th><th>Ukupno</th>
+  </tr></thead>
+  <tbody>${irows}</tbody>
+</table>
+
+<div class="ptots">
+  <div class="ptots-inner">${totsHtml}</div>
+</div>
+
+${noteHtml}
+
+<div class="pfoot">
+  <div>
+    <div style="font-weight:600;color:#333">${esc(s.name||'')}</div>
+    ${fctact ? `<div>${fctact}</div>` : ''}
+  </div>
+  <div class="psig">
+    <div class="psig-line"></div>
+    <div>Potpis i pečat</div>
+  </div>
+</div>`;
+}
+
+// ── Preview update ────────────────────────────────────
+function updatePrev(){
+  calcTotals();
+  const doc = currentDocObj();
+  document.getElementById('live-prev').innerHTML = buildDocHtml(doc);
+}
+
+function currentDocObj(){
+  const t    = $('f-type').value;
+  const vat  = $('f-vat').checked;
+  const apct = parseFloat($('f-apct').value)||50;
+  const s    = getSettings();
+  const sub  = items.reduce((x,it)=>x+itemTotal(it),0);
+  const vatA = vat ? sub*0.2 : 0;
+  const grd  = sub + vatA;
+  const av   = t==='avans' ? grd*(apct/100) : 0;
+  return {
+    id: editId||'draft',
+    type: t,
+    number:        $('f-num').value,
+    date:          $('f-date').value,
+    dueDate:       $('f-due').value,
+    paymentMethod: $('f-pay').value,
+    validUntil:    $('f-valid').value,
+    advancePct:    apct,
+    client:{
+      name:    $('f-cn').value,
+      address: $('f-ca').value,
+      pib:     $('f-cp').value,
+      phone:   $('f-ct').value,
+      email:   $('f-ce').value,
+    },
+    items: items.map(it=>({...it})),
+    note:        $('f-note').value,
+    vatIncluded: vat,
+    totalAmount: t==='avans' ? av : grd,
+    companySnapshot: {...s}
+  };
+}
+
+// ── Print ─────────────────────────────────────────────
+function printDoc(){
+  document.getElementById('print-doc').innerHTML = buildDocHtml(currentDocObj());
+  window.print();
+}
+
+function printById(id){
+  const doc = getDocs().find(d=>d.id===id);
+  if(!doc) return;
+  document.getElementById('print-doc').innerHTML = buildDocHtml(doc);
+  window.print();
+}
+
+// ═══════════════════════════════════════════════════════
+//  SETTINGS
+// ═══════════════════════════════════════════════════════
+function loadSettingsForm(){
+  const s = getSettings();
+  $('s-name').value  = s.name||'';
+  $('s-addr').value  = s.address||'';
+  $('s-pib').value   = s.pib||'';
+  $('s-mb').value    = s.mb||'';
+  $('s-tel').value   = s.phone||'';
+  $('s-email').value = s.email||'';
+  $('s-web').value   = s.website||'';
+  $('s-vat').checked = s.vatRegistered||false;
+  renderAccList(s.accounts||['']);
+  renderLogoPrev(s.logo);
+}
+
+function renderAccList(accs){
+  document.getElementById('acc-list').innerHTML = accs.map((a,i)=>`
+    <div class="acc-row">
+      <input type="text" value="${esc(a)}" placeholder="npr. 205-123456789-01">
+      ${accs.length>1 ? `<button class="btn bdan bsm" onclick="removeAcc(${i})">×</button>` : ''}
+    </div>`).join('');
+}
+
+function accsFromDOM(){ return [...document.querySelectorAll('#acc-list input')].map(i=>i.value); }
+
+function addAcc(){ renderAccList([...accsFromDOM(), '']); }
+function removeAcc(i){ const a=accsFromDOM(); a.splice(i,1); renderAccList(a); }
+
+function uploadLogo(input){
+  const f = input.files[0];
+  if(!f) return;
+  const r = new FileReader();
+  r.onload = e => {
+    document.getElementById('logo-prv-wrap').dataset.logo = e.target.result;
+    renderLogoPrev(e.target.result);
+  };
+  r.readAsDataURL(f);
+}
+
+function renderLogoPrev(logo){
+  const w   = document.getElementById('logo-prv-wrap');
+  const btn = document.getElementById('logo-rm-btn');
+  if(logo){
+    w.innerHTML = `<img src="${logo}" alt="Logo" style="max-height:72px;max-width:200px;object-fit:contain">`;
+    w.dataset.logo = logo;
+    btn.style.display = 'inline-flex';
+  } else {
+    w.innerHTML = `<div style="font-size:26px;margin-bottom:6px">📷</div>
+      <div style="color:var(--text3);font-size:13px">Kliknite za upload loga (PNG, JPG, SVG)</div>`;
+    w.dataset.logo = '';
+    btn.style.display = 'none';
+  }
+}
+
+function removeLogo(){ renderLogoPrev(null); }
+
+function saveSettings(){
+  const nm = $('s-name').value.trim();
+  if(!nm){ toast('Unesite naziv firme!','err'); return; }
+  saveSettingsData({
+    name:        nm,
+    address:     $('s-addr').value.trim(),
+    pib:         $('s-pib').value.trim(),
+    mb:          $('s-mb').value.trim(),
+    accounts:    accsFromDOM().filter(a=>a.trim()),
+    phone:       $('s-tel').value.trim(),
+    email:       $('s-email').value.trim(),
+    website:     $('s-web').value.trim(),
+    vatRegistered: $('s-vat').checked,
+    logo:        document.getElementById('logo-prv-wrap').dataset.logo || null
+  });
+  toast('Podešavanja sačuvana!','ok');
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODAL
+// ═══════════════════════════════════════════════════════
+function confirm2(title, msg, cb){
+  $('cm-title').textContent = title;
+  $('cm-msg').textContent   = msg;
+  confirmCb = cb;
+  $('confirm-ov').classList.add('on');
+}
+function closeModal(){
+  $('confirm-ov').classList.remove('on');
+  confirmCb = null;
+}
+$('cm-ok').onclick = ()=>{ closeModal(); if(confirmCb) confirmCb(); };
+$('confirm-ov').addEventListener('click', e=>{ if(e.target===$('confirm-ov')) closeModal(); });
+
+// ═══════════════════════════════════════════════════════
+//  TOASTS
+// ═══════════════════════════════════════════════════════
+function toast(msg, type='nfo'){
+  const icons = {ok:'✓', err:'✗', nfo:'ℹ'};
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span>${icons[type]||'ℹ'}</span>${msg}`;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .3s'; setTimeout(()=>el.remove(),350); }, 3200);
+}
+
+// ═══════════════════════════════════════════════════════
+//  UTILITIES
+// ═══════════════════════════════════════════════════════
+const $ = id => document.getElementById(id);
+
+function fmtMoney(v){
+  const n = parseFloat(v)||0;
+  return n.toLocaleString('sr-RS',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' RSD';
+}
+function fmtNum(v){
+  const n = parseFloat(v)||0;
+  return n%1===0 ? String(n) : n.toFixed(2);
+}
+function fmtDate(s){
+  if(!s) return '—';
+  try{
+    const d = new Date(s+'T00:00:00');
+    return d.toLocaleDateString('sr-RS',{day:'2-digit',month:'2-digit',year:'numeric'});
+  }catch{ return s; }
+}
+function toDateVal(d){ return d.toISOString().split('T')[0]; }
+function addDays(d,n){ const r=new Date(d); r.setDate(r.getDate()+n); return r; }
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function esc(s){
+  if(!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+(function init(){
+  const s = getSettings();
+  if(!s.address && !s.pib){
+    setTimeout(()=>toast('Dobrodošli! Podesite podatke o firmi u Podešavanjima.','nfo'),600);
+  }
+  renderList();
+})();
+</script>
+</body>
+</html>
