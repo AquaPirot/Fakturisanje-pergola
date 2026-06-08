@@ -298,8 +298,9 @@ body{
 #print-area{display:none}
 
 @media print{
+  html,body{background:#fff!important;color:#111!important}
   body>*:not(#print-area){display:none!important}
-  #print-area{display:block!important}
+  #print-area{display:block!important;background:#fff!important}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   @page{margin:10mm 14mm;size:A4}
 }
