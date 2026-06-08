@@ -626,9 +626,8 @@ body{
 <div class="toasts" id="toasts"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════
-//  CONSTANTS
-// ═══════════════════════════════════════════════════════
+const $ = id => document.getElementById(id);
+
 const SK = { DOCS:'ph_docs', SET:'ph_settings', CTR:'ph_counters' };
 
 // ═══════════════════════════════════════════════════════
@@ -1287,8 +1286,6 @@ function toast(msg, type='nfo'){
 // ═══════════════════════════════════════════════════════
 //  UTILITIES
 // ═══════════════════════════════════════════════════════
-const $ = id => document.getElementById(id);
-
 function fmtMoney(v){
   const n = parseFloat(v)||0;
   return n.toLocaleString('sr-RS',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' RSD';
