@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <!-- Full bleed background for maskable -->
+  <rect width="192" height="192" fill="#1a1a2e"/>
+  <!-- Safe zone content (centered, within ~80% = 154px) -->
+  <rect x="28" y="26" width="10" height="32" rx="3" fill="#4fa3e8" opacity=".85"/>
+  <rect x="46" y="26" width="10" height="32" rx="3" fill="#4fa3e8" opacity=".85"/>
+  <rect x="64" y="26" width="10" height="32" rx="3" fill="#4fa3e8" opacity=".85"/>
+  <rect x="82" y="26" width="10" height="32" rx="3" fill="#4fa3e8" opacity=".85"/>
+  <rect x="100" y="26" width="10" height="32" rx="3" fill="#4fa3e8" opacity=".85"/>
+  <rect x="118" y="26" width="10" height="32" rx="3" fill="#4fa3e8" opacity=".85"/>
+  <rect x="136" y="26" width="10" height="32" rx="3" fill="#4fa3e8" opacity=".85"/>
+  <rect x="154" y="26" width="10" height="32" rx="3" fill="#4fa3e8" opacity=".85"/>
+  <rect x="22" y="52" width="148" height="13" rx="4" fill="#e94560"/>
+  <rect x="22" y="65" width="12" height="90" rx="4" fill="#2a4a7a"/>
+  <rect x="158" y="65" width="12" height="90" rx="4" fill="#2a4a7a"/>
+  <rect x="48" y="72" width="96" height="78" rx="7" fill="#0f3460"/>
+  <rect x="48" y="72" width="96" height="78" rx="7" fill="none" stroke="#2a4a7a" stroke-width="1.5"/>
+  <rect x="60" y="87" width="72" height="8" rx="3" fill="#eaeaea" opacity=".75"/>
+  <rect x="60" y="102" width="54" height="6" rx="2" fill="#a8b2c8" opacity=".55"/>
+  <rect x="60" y="114" width="62" height="6" rx="2" fill="#a8b2c8" opacity=".55"/>
+  <rect x="60" y="128" width="72" height="10" rx="3" fill="#e94560" opacity=".7"/>
+</svg>
