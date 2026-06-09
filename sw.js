@@ -1,4 +1,4 @@
-const CACHE = 'ph-v4';
+const CACHE = 'ph-v5';
 const SHELL = ['./','./index.html','./manifest.json','./sw.js','./icons/icon.svg','./icons/icon-maskable.svg'];
 
 self.addEventListener('install', e => {
