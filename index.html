@@ -631,18 +631,12 @@ const $ = id => document.getElementById(id);
 
 const SK = { DOCS:'ph_docs', SET:'ph_settings', CTR:'ph_counters' };
 
-// ═══════════════════════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════════════════════
 let activeFilter = 'all';
-let editId       = null;   // null = new doc
-let items        = [];     // current editing items
-let iCtr         = 0;      // item id counter
+let editId       = null;
+let items        = [];
+let iCtr         = 0;
 let confirmCb    = null;
 
-// ═══════════════════════════════════════════════════════
-//  STORAGE HELPERS
-// ═══════════════════════════════════════════════════════
 const getDocs    = () => JSON.parse(localStorage.getItem(SK.DOCS)  || '[]');
 const saveDocs   = d  => localStorage.setItem(SK.DOCS, JSON.stringify(d));
 const getCtr     = () => JSON.parse(localStorage.getItem(SK.CTR)   || '{}');
@@ -659,7 +653,6 @@ function getSettings(){
 }
 function saveSettingsData(s){ localStorage.setItem(SK.SET, JSON.stringify(s)); }
 
-// Next doc number (actually increments counter)
 function nextNum(type){
   const yr = new Date().getFullYear();
   const c  = getCtr();
@@ -669,7 +662,6 @@ function nextNum(type){
   const pfx = {predracun:'PR', avans:'AR', faktura:'F'}[type];
   return `${pfx}-${yr}-${String(c[k]).padStart(3,'0')}`;
 }
-// Peek without incrementing
 function peekNum(type){
   const yr = new Date().getFullYear();
   const c  = getCtr();
@@ -679,9 +671,6 @@ function peekNum(type){
   return `${pfx}-${yr}-${String(n).padStart(3,'0')}`;
 }
 
-// ═══════════════════════════════════════════════════════
-//  VIEW MANAGEMENT
-// ═══════════════════════════════════════════════════════
 function showView(v){
   document.querySelectorAll('.view').forEach(el => el.classList.remove('on'));
   document.querySelectorAll('.nbtn').forEach(b  => b.classList.remove('active'));
@@ -693,9 +682,6 @@ function showView(v){
   window.scrollTo(0,0);
 }
 
-// ═══════════════════════════════════════════════════════
-//  LIST VIEW
-// ═══════════════════════════════════════════════════════
 function setFilter(f, btn){
   activeFilter = f;
   document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
@@ -754,9 +740,6 @@ function renderList(){
   </table>`;
 }
 
-// ═══════════════════════════════════════════════════════
-//  EDITOR
-// ═══════════════════════════════════════════════════════
 function newDoc(){
   editId = null;
   items  = [];
@@ -822,7 +805,6 @@ function onTypeChange(){
   updatePrev();
 }
 
-// ── Items ────────────────────────────────────────────
 function addItem(){
   iCtr++;
   items.push({_id:iCtr, description:'', unit:'kom', qty:1, price:0, discount:0});
@@ -898,7 +880,7 @@ function saveDoc(){
   const { sub, vatA, total, avA, pay, vat, apct } = calcTotals();
   const s  = getSettings();
 
-  if(!editId) nextNum(t); // advance counter for next auto-number
+  if(!editId) nextNum(t);
   const doc = {
     id: editId || uid(),
     type: t,
@@ -985,22 +967,17 @@ function delConfirm(id){
   );
 }
 
-// ═══════════════════════════════════════════════════════
-//  DOCUMENT HTML BUILDER  (used for both preview & print)
-// ═══════════════════════════════════════════════════════
 function buildDocHtml(doc){
   const s  = doc.companySnapshot || getSettings();
   const tN = {predracun:'PREDRAČUN', avans:'AVANSNI RAČUN', faktura:'FAKTURA'};
   const apct = doc.advancePct || 50;
 
-  // Recalculate from items for accuracy
   const sub  = (doc.items||[]).reduce((x,it)=>x+itemTotal(it),0);
   const vat  = doc.vatIncluded ? sub*0.2 : 0;
   const grd  = sub + vat;
   const av   = doc.type==='avans' ? grd*(apct/100) : 0;
   const pay  = doc.type==='avans' ? av : grd;
 
-  // Logo / name header
   let logoHtml = '';
   if(s.logo){
     logoHtml = `<div class="ph-logo"><img src="${s.logo}" alt="Logo"></div>
@@ -1009,7 +986,6 @@ function buildDocHtml(doc){
     logoHtml = `<div class="ph-name">${esc(s.name||'')}</div>`;
   }
 
-  // Company details
   const compDets = [
     s.address ? `<div class="ph-sub">${esc(s.address)}</div>` : '',
     (s.pib||s.mb) ? `<div class="ph-sub">PIB: ${esc(s.pib||'')}${s.mb?` | MB: ${esc(s.mb)}`:''}`  + '</div>' : '',
@@ -1017,11 +993,9 @@ function buildDocHtml(doc){
     s.email  ? `<div class="ph-sub">${esc(s.email)}</div>` : '',
   ].join('');
 
-  // Accounts
   const accs = (s.accounts||[]).filter(a=>a.trim());
   const accHtml = accs.map(a=>`<div class="ppd">Žiro račun: ${esc(a)}</div>`).join('');
 
-  // Items rows
   const irows = (doc.items||[]).map((it,i)=>`
     <tr>
       <td>${i+1}</td>
@@ -1033,7 +1007,6 @@ function buildDocHtml(doc){
       <td>${fmtMoney(itemTotal(it))}</td>
     </tr>`).join('');
 
-  // Totals block
   let totsHtml = `
     <div class="ptot-row"><label>Zbir bez PDV:</label><span>${fmtMoney(sub)}</span></div>`;
   if(doc.vatIncluded)
@@ -1042,7 +1015,6 @@ function buildDocHtml(doc){
     totsHtml += `<div class="ptot-row"><label>Iznos avansa (${apct}%):</label><span>${fmtMoney(av)}</span></div>`;
   totsHtml += `<div class="ptot-row"><label>UKUPNO ZA UPLATU:</label><span>${fmtMoney(pay)}</span></div>`;
 
-  // Special boxes
   let spHtml = '';
   if(doc.type==='predracun' && doc.validUntil)
     spHtml += `<div class="psp-box"><div class="psp-lbl">Rok važenja</div><div class="psp-val">${fmtDate(doc.validUntil)}</div></div>`;
@@ -1051,11 +1023,9 @@ function buildDocHtml(doc){
     spHtml += `<div class="psp-box"><div class="psp-lbl">Iznos avansa</div><div class="psp-val">${fmtMoney(av)}</div></div>`;
   }
 
-  // Note
   const noteHtml = doc.note
     ? `<div class="pnote"><strong>Napomena:</strong> ${esc(doc.note)}</div>` : '';
 
-  // Footer contact
   const fctact = [
     s.phone  && `Tel: ${s.phone}`,
     s.email  && s.email,
@@ -1122,13 +1092,11 @@ ${noteHtml}
     ${fctact ? `<div>${fctact}</div>` : ''}
   </div>
   <div class="psig">
-    <div class="psig-line"></div>
-    <div>Potpis i pečat</div>
+    <div style="font-size:11px;color:#888;font-style:italic">Važi bez potpisa i pečata</div>
   </div>
 </div>`;
 }
 
-// ── Preview update ────────────────────────────────────
 function updatePrev(){
   calcTotals();
   const doc = currentDocObj();
@@ -1168,7 +1136,6 @@ function currentDocObj(){
   };
 }
 
-// ── Print ─────────────────────────────────────────────
 function printDoc(){
   document.getElementById('print-doc').innerHTML = buildDocHtml(currentDocObj());
   window.print();
@@ -1181,9 +1148,6 @@ function printById(id){
   window.print();
 }
 
-// ═══════════════════════════════════════════════════════
-//  SETTINGS
-// ═══════════════════════════════════════════════════════
 function loadSettingsForm(){
   const s = getSettings();
   $('s-name').value  = s.name||'';
@@ -1257,9 +1221,6 @@ function saveSettings(){
   toast('Podešavanja sačuvana!','ok');
 }
 
-// ═══════════════════════════════════════════════════════
-//  MODAL
-// ═══════════════════════════════════════════════════════
 function confirm2(title, msg, cb){
   $('cm-title').textContent = title;
   $('cm-msg').textContent   = msg;
@@ -1273,9 +1234,6 @@ function closeModal(){
 $('cm-ok').onclick = ()=>{ closeModal(); if(confirmCb) confirmCb(); };
 $('confirm-ov').addEventListener('click', e=>{ if(e.target===$('confirm-ov')) closeModal(); });
 
-// ═══════════════════════════════════════════════════════
-//  TOASTS
-// ═══════════════════════════════════════════════════════
 function toast(msg, type='nfo'){
   const icons = {ok:'✓', err:'✗', nfo:'ℹ'};
   const el = document.createElement('div');
@@ -1285,9 +1243,6 @@ function toast(msg, type='nfo'){
   setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .3s'; setTimeout(()=>el.remove(),350); }, 3200);
 }
 
-// ═══════════════════════════════════════════════════════
-//  UTILITIES
-// ═══════════════════════════════════════════════════════
 function fmtMoney(v){
   const n = parseFloat(v)||0;
   return n.toLocaleString('sr-RS',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' RSD';
@@ -1311,9 +1266,6 @@ function esc(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ═══════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════
 (function init(){
   const s = getSettings();
   if(!s.address && !s.pib){
