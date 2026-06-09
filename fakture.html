@@ -452,7 +452,7 @@ body{
           </div>
           <div class="fg">
             <label>Broj dokumenta</label>
-            <input type="text" id="f-num" readonly>
+            <input type="text" id="f-num" oninput="updatePrev()">
           </div>
           <div class="fg">
             <label>Datum izdavanja</label>
@@ -898,10 +898,11 @@ function saveDoc(){
   const { sub, vatA, total, avA, pay, vat, apct } = calcTotals();
   const s  = getSettings();
 
+  if(!editId) nextNum(t); // advance counter for next auto-number
   const doc = {
     id: editId || uid(),
     type: t,
-    number: editId ? $('f-num').value : nextNum(t),
+    number: $('f-num').value.trim() || peekNum(t),
     date: $('f-date').value,
     dueDate: $('f-due').value,
     paymentMethod: $('f-pay').value,
